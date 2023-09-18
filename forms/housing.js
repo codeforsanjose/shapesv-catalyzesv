@@ -240,9 +240,9 @@ const formTranslations = {
       questions: [
         {
           title: {
-            en: "Are you part of a Community Based Organization? Select one?",
-            es: "¿Eres parte de una Organización Comunitaria? Selecciona una.",
-            vi: "Bạn có phải là thành viên của Tổ chức Dựa vào Cộng đồng không? Hãy chọn một.",
+            en: "Are you part of a Community Based Organization?",
+            es: "¿Eres parte de una Organización Comunitaria?",
+            vi: "Bạn có phải là thành viên của Tổ chức Dựa vào Cộng đồng không?",
           },
           subheading: {
             en: "Select one dropdown choice",
@@ -343,7 +343,7 @@ const formTranslations = {
           },
           value: {
             en: [
-              "under $50,000",
+              "Under $50,000",
               "$50,000 - $100,000",
               "$100,000 - $200,000",
               "Over $200,000",
