@@ -10,13 +10,13 @@ const formTranslations = {
             vi: "Bạn quan tâm đến loại nhà ở nào?",
           },
           subheading: {
-            en: "Select up to 3 Choices",
+            en: "Select up to 3 Choices (Required)",
             es: "Selecciona hasta 3 opciones",
             vi: "Chọn tối đa 3 lựa chọn",
           },
           value: {
             en: [
-              "Market-rate Housing",
+              "Market-Rate Housing",
               "Senior Housing",
               "Foster Youth Housing",
               "Affordable Housing -- making less than area AMI",
@@ -71,7 +71,7 @@ const formTranslations = {
             vi: "Bạn muốn có các tiện nghi gì trong ngôi nhà/công trình nhà ở của bạn?",
           },
           subheading: {
-            en: "Please select up to 3 choices",
+            en: "Please select up to 3 choices (Required)",
             es: "Selecciona hasta 3 opciones",
             vi: "Vui lòng chọn tối đa 3 lựa chọn",
           },
@@ -130,7 +130,7 @@ const formTranslations = {
             vi: "Bao gồm bạn, hiện tại có bao nhiêu người sống trong hộ gia đình của bạn?",
           },
           subheading: {
-            en: "Please select one",
+            en: "Please select one (Required)",
             es: "Selecciona una opción",
             vi: "Vui lòng chọn một lựa chọn",
           },
@@ -183,7 +183,7 @@ const formTranslations = {
             vi: "Bạn bao nhiêu tuổi?",
           },
           subheading: {
-            en: "Select one dropdown choice",
+            en: "Select one dropdown choice (Required)",
             es: "Selecciona una opción del menú desplegable",
             vi: "Chọn một lựa chọn trong danh sách thả xuống",
           },
@@ -227,7 +227,7 @@ const formTranslations = {
             vi: "Mã bưu điện của ngôi nhà của bạn là gì?",
           },
           subheading: {
-            en: "Please enter a valid Zip code",
+            en: "Please enter a valid Zip code (Required)",
             es: "Por favor, ingresa un código postal válido",
             vi: "Vui lòng nhập mã bưu điện hợp lệ",
           },
@@ -245,7 +245,7 @@ const formTranslations = {
             vi: "Bạn có phải là thành viên của Tổ chức Dựa vào Cộng đồng không?",
           },
           subheading: {
-            en: "Select one dropdown choice",
+            en: "Select one dropdown choice (Required)",
             es: "Selecciona una opción del menú desplegable",
             vi: "Chọn một lựa chọn trong danh sách thả xuống",
           },
@@ -340,7 +340,7 @@ const formTranslations = {
             vi: "Khoảng thu nhập của hộ gia đình bạn là bao nhiêu?",
           },
           subheading: {
-            en: "Select one dropdown choice",
+            en: "Select one dropdown choice (Required)",
             es: "Selecciona una opción del menú desplegable",
             vi: "Chọn một lựa chọn trong danh sách thả xuống",
           },
@@ -405,11 +405,6 @@ const formTranslations = {
   },
 };
 
-// Velo API Reference: https://www.wix.com/velo/reference/api-overview/introduction
-
-// Velo API Reference: https://www.wix.com/velo/reference/api-overview/introduction
-// import { addValuesToGoogleSheet } from 'backend/question_googlesheetMay2023';
-
 const googleSheetsTab = "'Affordability Form Data (wix)'!A2";
 
 import { addValuesToGoogleSheet } from "backend/google-sheets";
@@ -426,6 +421,7 @@ $w.onReady(function () {
   const boxStates = multiStateBox.states;
   const checkboxGroups = $w("CheckboxGroup");
   const textInputs = $w("TextInput");
+  const zipInput = $w("#zipInput");
   const textBoxs = $w("TextBox");
   const btnBack = $w("#btnBack");
   const btnNext = $w("#btnNext");
@@ -650,5 +646,11 @@ $w.onReady(function () {
       const children = multiStateBox.currentState.children;
       checkCurrValidity(children);
     });
+  });
+
+  zipInput.maxLength = 5;
+  zipInput.onCustomValidation((value, reject) => {
+    if (value.length !== 5 || value.split("").some((char) => !isNumber(char)))
+      reject("Not a valid Zip code");
   });
 });
