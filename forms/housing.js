@@ -216,7 +216,7 @@ const formTranslations = {
               "55-64",
               "65-74",
               "75 trở lên",
-              "không muốn trả lời",
+              "Không muốn trả lời",
             ],
           },
         },
