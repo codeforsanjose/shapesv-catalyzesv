@@ -10,9 +10,9 @@ const formTranslations = {
             vi: "Trong sự phát triển, lợi ích cộng đồng nào sau đây quan trọng nhất đối với bạn?",
           },
           subheading: {
-            en: "Select up to 3 Choices",
-            es: "Selecciona hasta 3 opciones",
-            vi: "Chọn tối đa 3 lựa chọn",
+            en: "Select up to 3 Choices (Required)",
+            es: "Selecciona hasta 3 opciones (Requerido)",
+            vi: "Chọn tối đa 3 lựa chọn (Yêu cầu)",
           },
           value: {
             en: [
@@ -65,9 +65,9 @@ const formTranslations = {
             vi: "Bạn muốn thấy loại cửa hàng gì nhiều hơn trong khu vực của bạn?",
           },
           subheading: {
-            en: "Select up to 2 Choices",
-            es: "Selecciona hasta 2 opciones",
-            vi: "Chọn tối đa 2 lựa chọn",
+            en: "Select up to 2 Choices (Required)",
+            es: "Selecciona hasta 2 opciones (Requerido)",
+            vi: "Chọn tối đa 2 lựa chọn (Yêu cầu)",
           },
           value: {
             en: [
@@ -105,9 +105,9 @@ const formTranslations = {
             vi: "Loại cửa hàng gì bạn KHÔNG muốn thấy nhiều hơn trong khu vực của bạn?",
           },
           subheading: {
-            en: "Please enter a response",
-            es: "Por favor, ingresa una respuesta",
-            vi: "Vui lòng nhập phản hồi",
+            en: "Please enter a response (Required)",
+            es: "Por favor, ingresa una respuesta (Requerido)",
+            vi: "Vui lòng nhập phản hồi (Yêu cầu)",
           },
           value: null,
         },
@@ -123,9 +123,9 @@ const formTranslations = {
             vi: "Theo ý kiến của bạn, điều gì làm cho khu vực của bạn trở nên sôi động hơn?",
           },
           subheading: {
-            en: "Optional",
-            es: "Opcional",
-            vi: "Không bắt buộc",
+            en: "(Optional)",
+            es: "(Opcional)",
+            vi: "(Không bắt buộc)",
           },
           value: null,
         },
@@ -141,9 +141,9 @@ const formTranslations = {
             vi: "Vui lòng đánh dấu dân tộc của bạn",
           },
           subheading: {
-            en: "Select one dropdown choice",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            en: "Select one dropdown choice (Required)",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -185,9 +185,9 @@ const formTranslations = {
             vi: "Bạn bao nhiêu tuổi?",
           },
           subheading: {
-            en: "Select one dropdown choice",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            en: "Select one dropdown choice (Required)",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -229,9 +229,9 @@ const formTranslations = {
             vi: "Mã bưu điện của ngôi nhà của bạn là gì?",
           },
           subheading: {
-            en: "Please enter a valid Zip code",
-            es: "Por favor, ingresa un código postal válido",
-            vi: "Vui lòng nhập mã bưu điện hợp lệ",
+            en: "Please enter a valid Zip code (Required)",
+            es: "Por favor, ingresa un código postal válido (Requerido)",
+            vi: "Vui lòng nhập mã bưu điện hợp lệ (Yêu cầu)",
           },
           value: null,
         },
@@ -247,9 +247,9 @@ const formTranslations = {
             vi: "Bạn có phải là thành viên của Tổ chức Dựa vào Cộng đồng không?",
           },
           subheading: {
-            en: "Select one dropdown choice",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            en: "Select one dropdown choice (Required)",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -342,9 +342,9 @@ const formTranslations = {
             vi: "Khoảng thu nhập của hộ gia đình bạn là bao nhiêu?",
           },
           subheading: {
-            en: "Select one dropdown choice",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            en: "Select one dropdown choice (Required)",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -428,6 +428,8 @@ $w.onReady(function () {
   const boxStates = multiStateBox.states;
   const checkboxGroups = $w("CheckboxGroup");
   const textInputs = $w("TextInput");
+  const dropdowns = $w("Dropdown");
+  const zipInput = $w("#zipInput");
   const textBoxs = $w("TextBox");
   const btnBack = $w("#btnBack");
   const btnNext = $w("#btnNext");
@@ -631,6 +633,7 @@ $w.onReady(function () {
   });
   multiStateBox.onChange((event) => {
     const children = event.target.currentState.children;
+    $w("#anchor1").scrollTo();
     showHideBtns();
     checkCurrValidity(children);
   });
@@ -640,8 +643,25 @@ $w.onReady(function () {
     checkCurrValidity(children);
   });
 
+  dropdowns.forEach((drop, i) => {
+    if (i === 0) return;
+
+    drop.onChange(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+    drop.onClick(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+  });
+
   textInputs.forEach((input) => {
     input.onInput(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+    input.onChange(() => {
       const children = multiStateBox.currentState.children;
       checkCurrValidity(children);
     });
@@ -652,5 +672,15 @@ $w.onReady(function () {
       const children = multiStateBox.currentState.children;
       checkCurrValidity(children);
     });
+    box.onChange(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+  });
+
+  zipInput.maxLength = 5;
+  zipInput.onCustomValidation((value, reject) => {
+    if (value.length !== 5 || value.split("").some((char) => !isNumber(char)))
+      reject("Not a valid Zip code");
   });
 });

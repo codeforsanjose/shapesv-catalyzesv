@@ -11,8 +11,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Select up to 3 Choices (Required)",
-            es: "Selecciona hasta 3 opciones",
-            vi: "Chọn tối đa 3 lựa chọn",
+            es: "Selecciona hasta 3 opciones (Requerido)",
+            vi: "Chọn tối đa 3 lựa chọn (Yêu cầu)",
           },
           value: {
             en: [
@@ -72,8 +72,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Please select up to 3 choices (Required)",
-            es: "Selecciona hasta 3 opciones",
-            vi: "Vui lòng chọn tối đa 3 lựa chọn",
+            es: "Selecciona hasta 3 opciones (Requerido)",
+            vi: "Vui lòng chọn tối đa 3 lựa chọn (Yêu cầu)",
           },
           value: {
             en: [
@@ -112,9 +112,9 @@ const formTranslations = {
             vi: "Chia sẻ mọi đề xuất mà bạn có cho sự phát triển nhà ở trong khu vực của bạn.",
           },
           subheading: {
-            en: "Optional",
-            es: "Opcional",
-            vi: "Không bắt buộc",
+            en: "(Optional)",
+            es: "(Opcional)",
+            vi: "(Không bắt buộc)",
           },
           value: null,
         },
@@ -131,8 +131,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Please select one (Required)",
-            es: "Selecciona una opción",
-            vi: "Vui lòng chọn một lựa chọn",
+            es: "Selecciona una opción (Requerido)",
+            vi: "Vui lòng chọn một lựa chọn (Yêu cầu)",
           },
           value: {
             en: [
@@ -184,8 +184,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Select one dropdown choice (Required)",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -228,8 +228,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Please enter a valid Zip code (Required)",
-            es: "Por favor, ingresa un código postal válido",
-            vi: "Vui lòng nhập mã bưu điện hợp lệ",
+            es: "Por favor, ingresa un código postal válido (Requerido)",
+            vi: "Vui lòng nhập mã bưu điện hợp lệ (Yêu cầu)",
           },
           value: null,
         },
@@ -246,8 +246,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Select one dropdown choice (Required)",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -341,8 +341,8 @@ const formTranslations = {
           },
           subheading: {
             en: "Select one dropdown choice (Required)",
-            es: "Selecciona una opción del menú desplegable",
-            vi: "Chọn một lựa chọn trong danh sách thả xuống",
+            es: "Selecciona una opción del menú desplegable (Requerido)",
+            vi: "Chọn một lựa chọn trong danh sách thả xuống (Yêu cầu)",
           },
           value: {
             en: [
@@ -388,9 +388,9 @@ const formTranslations = {
   },
   buttons: {
     next: {
-      en: "Continue>",
-      es: "Continuar>",
-      vi: "Tiếp tục>",
+      en: "Continue",
+      es: "Continuar",
+      vi: "Tiếp tục",
     },
     back: {
       en: "Back",
@@ -404,6 +404,11 @@ const formTranslations = {
     },
   },
 };
+
+// Velo API Reference: https://www.wix.com/velo/reference/api-overview/introduction
+
+// Velo API Reference: https://www.wix.com/velo/reference/api-overview/introduction
+// import { addValuesToGoogleSheet } from 'backend/question_googlesheetMay2023';
 
 const googleSheetsTab = "'Affordability Form Data (wix)'!A2";
 
@@ -421,6 +426,7 @@ $w.onReady(function () {
   const boxStates = multiStateBox.states;
   const checkboxGroups = $w("CheckboxGroup");
   const textInputs = $w("TextInput");
+  const dropdowns = $w("Dropdown");
   const zipInput = $w("#zipInput");
   const textBoxs = $w("TextBox");
   const btnBack = $w("#btnBack");
@@ -625,6 +631,7 @@ $w.onReady(function () {
   });
   multiStateBox.onChange((event) => {
     const children = event.target.currentState.children;
+    $w("#anchor1").scrollTo();
     showHideBtns();
     checkCurrValidity(children);
   });
@@ -634,8 +641,25 @@ $w.onReady(function () {
     checkCurrValidity(children);
   });
 
+  dropdowns.forEach((drop, i) => {
+    if (i === 0) return;
+
+    drop.onChange(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+    drop.onClick(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+  });
+
   textInputs.forEach((input) => {
     input.onInput(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+    input.onChange(() => {
       const children = multiStateBox.currentState.children;
       checkCurrValidity(children);
     });
@@ -643,6 +667,10 @@ $w.onReady(function () {
 
   textBoxs.forEach((box) => {
     box.onInput(() => {
+      const children = multiStateBox.currentState.children;
+      checkCurrValidity(children);
+    });
+    box.onChange(() => {
       const children = multiStateBox.currentState.children;
       checkCurrValidity(children);
     });
