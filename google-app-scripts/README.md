@@ -22,7 +22,7 @@ If access is required, ask Shalini
 7. Setup Trigger (On the left bar clock icon is for Triggers)
 8. Click “+ Add Trigger” (At the bottom right) and select as shown below & Save
 
-   - ![Screenshot of adding a trigger on google app.](./adding-triggers.png)
+   - ![Screenshot of adding a trigger on google app.](./images/adding-triggers.png)
 
 9. Allow Google account to work with Apps Script
 10. [Create a Dataset in Wix](#create-a-dataset-in-wix) with the same name as the “Version7CSVProjects” in the master spreadsheet
@@ -43,7 +43,7 @@ If access is required, ask Shalini
 ## Wix Code - Expose API
 
 1. On your wix site, add a new file by clicking the plus and selecting “Expose site API”
-   - ![Screenshot of wix interface to expose site API](./wix-exposing-site-api.png)
+   - ![Screenshot of wix interface to expose site API](./images/wix-exposing-site-api.png)
 2. Then copy and paste the entire code from below into the file.
    - [Code](./wix-http-functions.js)
 
@@ -55,8 +55,8 @@ If access is required, ask Shalini
    - Ex: “super-duper-secret”
    - Recommended to be at least 32 characters.
    - REMEMBER THIS SECRET STRING TO UPDATE THE GOOGLE APP SCRIPTS “AUTH_KEY”
-   - ![Screenshot of finding wix secrets manager](./wix-secrets-manager.png)
-   - ![Screenshot of wix secrets Manager interface](./wix-secrets-manager2.png)
+   - ![Screenshot of finding wix secrets manager](./images/wix-secrets-manager.png)
+   - ![Screenshot of wix secrets Manager interface](./images/wix-secrets-manager2.png)
 
 ## Create a Dataset in Wix
 
@@ -66,9 +66,9 @@ If access is required, ask Shalini
 - Give a name to the collection
 - Edit Permission Settings
 
-![Creating a dataset step 1](./wix-create-dataset.png)
-![Creating a dataset step 2](./wix-create-dataset2.png)
-![Creating a dataset step 3](./wix-create-dataset3.png)
+![Creating a dataset step 1](./images/wix-create-dataset.png)
+![Creating a dataset step 2](./images/wix-create-dataset2.png)
+![Creating a dataset step 3](./images/wix-create-dataset3.png)
 
 **Make sure WIX_URL is correct in AppScript and to update the AUTH_KEY**
 
@@ -92,7 +92,7 @@ Custom Image (Image)
 Link to the Website (URL)
 Detail Project Type is Tags
 All the rest Data type by default is Object Type (Make them Text)
-![wix dataset screenshot](./wix-dataset.png)
+![wix dataset screenshot](./images/wix-dataset.png)
 **Save all the other 6 projects (They go to Live Collection)**
 
 ## Connect Dataset in Wix to the List Page
@@ -103,7 +103,7 @@ All the rest Data type by default is Object Type (Make them Text)
 
 [Connect the following columns to the list page:](https://docs.google.com/spreadsheets/u/0/d/1jug0VQuns9ZwcCeat5iy7oN1IzBlQCzkmKLbA5S0xFs/edit) **Go to the Notes Tab for the latest**
 
-![screenshot of dataset chart](./dataset-chart.png)
+![screenshot of dataset chart](./images/dataset-chart.png)
 
 ## Connect Dataset in Wix to the Detail Page
 
@@ -111,4 +111,4 @@ Make the Master Detail Page as Dynamic Page
 Add the Dataset and
 [Connect the following columns to the list page:](https://docs.google.com/spreadsheets/u/0/d/1jug0VQuns9ZwcCeat5iy7oN1IzBlQCzkmKLbA5S0xFs/edit) **Go to the Notes Tab for the latest**
 **Connect the More Button in one of the Repeater to the Dynamic Page (Click Action Connects To)**
-![Screenshot of connecting dataset on wix](./wix-connecting-dataset.png)
+![Screenshot of connecting dataset on wix](./images/wix-connecting-dataset.png)
